@@ -1,58 +1,31 @@
 package com.yq.sort;
 
 import com.yq.sort.heapsort.HeapSort;
+import com.yq.sort.mergesort.MergeSort;
 import com.yq.sort.quicksort.QuickSort;
-import com.yq.sort.util.SortUtil;
-
 import java.util.Random;
 
 public class Main {
-    /**
-     * 快排测试
-     * @param arr 数组
-     * @throws Exception
-     */
-    private static void quickSortTest(int[] arr) {
-        try {
-            SortUtil.printArr(arr);
-            int len = arr.length;
-            QuickSort.quickSort(arr, 0, len - 1);
-            SortUtil.printArr(arr);
-            System.out.println(SortUtil.checkArrOrderly(arr));
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 堆排序测试
-     * @param arr 数组
-     * @throws Exception
-     */
-    private static void heapSortTest(int[] arr) {
-        try {
-            SortUtil.printArr(arr);
-            HeapSort.heapSort(arr, arr.length);
-            SortUtil.printArr(arr);
-            System.out.println(SortUtil.checkArrOrderly(arr));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public static void main(String[] args) {
-        int len = 50;
+        int len = 20;
         int[] arr = new int[len];
         Random random = new Random();
 
         // 生成随机数组
-        for (int i = 0; i < len - 1; i ++) {
+        for (int i = 0; i < len; i ++) {
             arr[i] = random.nextInt(1000);
         }
 
+        int[] arr1 = new int[len];
+        int[] arr2 = new int[len];
+        int[] arr3 = new int[len];
+        System.arraycopy(arr, 0, arr1, 0, len);
+        System.arraycopy(arr, 0, arr2, 0, len);
+        System.arraycopy(arr, 0, arr3, 0, len);
+
         // 测试排序类型
-        heapSortTest(arr);
+        QuickSort.quickSortTest(arr1);
+        HeapSort.heapSortTest(arr2);
+        MergeSort.mergeSortTest(arr3);
     }
 }

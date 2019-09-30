@@ -1,23 +1,39 @@
 package com.yq.sort.heapsort;
 
 import com.sun.istack.internal.NotNull;
-import com.yq.sort.util.SortUtil;
+import com.yq.sort.Sort;
 
-public class HeapSort {
+public class HeapSort extends Sort {
+    /**
+     * 堆排序测试
+     * @param arr 数组
+     * @throws Exception
+     */
+    public static void heapSortTest(int[] arr) {
+        try {
+            printArr(arr);
+            heapSort(arr, arr.length);
+            printArr(arr);
+            System.out.println(checkArrOrderly(arr));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 堆排序
      * @param arr 待排序数组
      * @param len 待排序数组长度
      * @throws Exception
      */
-    public static void heapSort(int[] arr, int len) throws Exception {
+    private static void heapSort(int[] arr, int len) throws Exception {
         // 格式化待排序数组，将数组构造成大顶堆
         constructHeap(arr, len);
 
         // 利用大顶堆的特性循环拿出未排序部分的最大值，直到未排序部分长度为1
         while (-- len > 0) {
             // 将根节点与还未排序的部分的最后一个节点互换
-            SortUtil.swap(arr, 0, len);
+            swap(arr, 0, len);
             // 将新的数组重新构造为堆
             regulateHeap(arr, 0, len);
         }
@@ -65,7 +81,7 @@ public class HeapSort {
             return;
         }
 
-        SortUtil.swap(arr, i, max);
+        swap(arr, i, max);
         regulateHeap(arr, max, len);
     }
 
@@ -78,7 +94,7 @@ public class HeapSort {
      * @throws Exception
      */
     private static Integer leftChild(int[] arr, int i, int len) throws Exception {
-        SortUtil.checkIndex(arr, i, 0);
+        checkIndex(arr, i, 0);
         int leftChildIndex = 2 * (i + 1) - 1;
         return leftChildIndex < len ? leftChildIndex : null;
     }
@@ -127,5 +143,33 @@ public class HeapSort {
         }
 
         return max;
+    }
+
+    /**
+     * 检测 len 长度的数组是否为堆
+     * @param arr 待检测数组
+     * @param len 需要检测的长度
+     * @return boolean
+     * @throws Exception
+     */
+    private static boolean checkIsHeap(int[] arr, int len) throws Exception {
+        if(len > arr.length) {
+            throw new Exception("数组长度错误");
+        }
+
+        for (int i = 0; i < len; i ++) {
+            int right = 2 * (i + 1);
+            int left = right - 1;
+
+            if(left < len && arr[left] > arr[i]) {
+                return false;
+            }
+
+            if(right < len && arr[right] > arr[i]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

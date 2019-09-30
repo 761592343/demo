@@ -1,8 +1,25 @@
 package com.yq.sort.quicksort;
 
-import com.yq.sort.util.SortUtil;
+import com.yq.sort.Sort;
 
-public class QuickSort {
+public class QuickSort extends Sort {
+    /**
+     * 快排测试
+     * @param arr 数组
+     * @throws Exception
+     */
+    public static void quickSortTest(int[] arr) {
+        try {
+            printArr(arr);
+            quickSort(arr, 0, arr.length - 1);
+            printArr(arr);
+            System.out.println(checkArrOrderly(arr));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 快速排序递归方法
      * @param arr 待排序数组
@@ -10,8 +27,8 @@ public class QuickSort {
      * @param j 右下标
      * @throws Exception
      */
-    public static void quickSort(int[] arr, int i, int j) throws Exception {
-        SortUtil.checkIndex(arr, i, j);
+    private static void quickSort(int[] arr, int i, int j) throws Exception {
+        checkIndex(arr, i, j);
         // p: 标志位
         // l: 左指针
         // r: 右指针
@@ -30,11 +47,11 @@ public class QuickSort {
 
             // 交换数组中左右下标所对应的值
             if(l < r) {
-                SortUtil.swap(arr, l, r);
+                swap(arr, l, r);
             }
             // 当 l == r 时，将标志位与指针l所在值互换
             else {
-                SortUtil.swap(arr, l, p);
+                swap(arr, l, p);
             }
         }
 
