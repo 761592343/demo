@@ -5,9 +5,9 @@ import com.yq.sort.util.SortUtil;
 public class QuickSort {
     /**
      * 快速排序递归方法
-     * @param arr
-     * @param i
-     * @param j
+     * @param arr 待排序数组
+     * @param i 左下标
+     * @param j 右下标
      * @throws Exception
      */
     public static void quickSort(int[] arr, int i, int j) throws Exception {
