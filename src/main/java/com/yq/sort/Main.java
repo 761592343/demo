@@ -8,13 +8,8 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         int len = 20;
-        int[] arr = new int[len];
         Random random = new Random();
-
-        // 生成随机数组
-        for (int i = 0; i < len; i ++) {
-            arr[i] = random.nextInt(1000);
-        }
+        int[] arr = random.ints(len, 0, 1000).toArray();
 
         int[] arr1 = new int[len];
         int[] arr2 = new int[len];
